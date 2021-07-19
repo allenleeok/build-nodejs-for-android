@@ -208,8 +208,8 @@ if [[ $BUILD_TYPE == --full ]]; then
     darwin*)
         case $ARCH in
         arm    )
-         _guide android-gcc-toolchain arm    $OPT --host ar-dual-os,gcc-no-lrt,gcc-m32 -C "<<< \"./configure --dest-cpu=arm    --dest-os=android && make\""
-                android-gcc-toolchain arm    $OPT --host ar-dual-os,gcc-no-lrt,gcc-m32 -C  <<<  "./configure --dest-cpu=arm    --dest-os=android && make" ;;
+         _guide /code/android-gcc-toolchain/android-gcc-toolchain arm    $OPT --host ar-dual-os,gcc-no-lrt,gcc-m32 -C "<<< \"./configure --dest-cpu=arm --dest-os=android --openssl-no-asm --with-intl=none --cross-compiling --shared && make\""
+                /code/android-gcc-toolchain/android-gcc-toolchain arm    $OPT --host ar-dual-os,gcc-no-lrt,gcc-m32 -C  <<<  "./configure --dest-cpu=arm --dest-os=android --openssl-no-asm --with-intl=none --cross-compiling --shared && make" ;;
         arm64  )
          _guide android-gcc-toolchain arm64  $OPT --host ar-dual-os,gcc-no-lrt         -C "<<< \"./configure --dest-cpu=arm64  --dest-os=android && make\""
                 android-gcc-toolchain arm64  $OPT --host ar-dual-os,gcc-no-lrt         -C  <<<  "./configure --dest-cpu=arm64  --dest-os=android && make" ;;
@@ -226,8 +226,8 @@ if [[ $BUILD_TYPE == --full ]]; then
     linux*)
         case $ARCH in
         arm    )
-         _guide android-gcc-toolchain arm    $OPT --host gcc-lpthread,gcc-m32 -C "<<< \"./configure --dest-cpu=arm    --dest-os=android && make\""
-                android-gcc-toolchain arm    $OPT --host gcc-lpthread,gcc-m32 -C  <<<  "./configure --dest-cpu=arm    --dest-os=android && make" ;;
+         _guide /code/android-gcc-toolchain/android-gcc-toolchain arm    $OPT --api 24 --host gcc-lpthread,gcc-m32 -C "<<< \"./configure --dest-cpu=arm    --dest-os=android --openssl-no-asm --with-intl=none --without-inspector --cross-compiling --shared && make\""
+                /code/android-gcc-toolchain/android-gcc-toolchain arm    $OPT --api 24 --host gcc-lpthread,gcc-m32 -C  <<<  "./configure --dest-cpu=arm    --dest-os=android --openssl-no-asm --with-intl=none --without-inspector --cross-compiling --shared && make" ;;
         arm64  )
          _guide android-gcc-toolchain arm64  $OPT --host gcc-lpthread         -C "<<< \"./configure --dest-cpu=arm64  --dest-os=android && make\""
                 android-gcc-toolchain arm64  $OPT --host gcc-lpthread         -C  <<<  "./configure --dest-cpu=arm64  --dest-os=android && make" ;;
@@ -269,7 +269,7 @@ lastError=${PIPESTATUS[0]};
 
 #copy build result to $OUT_DIR/{bin,lib,include}
 _guide "Installing to '$OUT_DIR'"
-android-gcc-toolchain $ARCH $OPT -C make DESTDIR="$OUT_DIR" PREFIX="" install | grep -vE '^installing|^symlinking|^removing'
+/code/android-gcc-toolchain/android-gcc-toolchain $ARCH $OPT -C make DESTDIR="$OUT_DIR" PREFIX="" install | grep -vE '^installing|^symlinking|^removing'
 
 lastError=${PIPESTATUS[0]};
 [[ $lastError != 0 ]] && { _guide "Failed to run make install"; exit $lastError; }
