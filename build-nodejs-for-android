@@ -246,11 +246,11 @@ if [[ $BUILD_TYPE == --full ]]; then
 else
     case $ARCH in
     arm    )
-     _guide android-gcc-toolchain arm    $OPT "<<< \"./configure --dest-cpu=arm    --dest-os=android --without-snapshot --without-inspector --without-intl && make\""
-            android-gcc-toolchain arm    $OPT  <<<  "./configure --dest-cpu=arm    --dest-os=android --without-snapshot --without-inspector --without-intl && make" ;;
+     _guide /code/android-gcc-toolchain/android-gcc-toolchain arm    $OPT "<<< \"./configure --dest-cpu=arm    --dest-os=android --openssl-no-asm --with-intl=none --cross-compiling --shared && make\""
+            /code/android-gcc-toolchain/android-gcc-toolchain arm    $OPT  <<<  "./configure --dest-cpu=arm    --dest-os=android --openssl-no-asm --with-intl=none --cross-compiling --shared && make" ;;
     arm64  )
-     _guide android-gcc-toolchain arm64  $OPT "<<< \"./configure --dest-cpu=arm64  --dest-os=android --without-snapshot --without-inspector --without-intl && make\""
-            android-gcc-toolchain arm64  $OPT  <<<  "./configure --dest-cpu=arm64  --dest-os=android --without-snapshot --without-inspector --without-intl && make" ;;
+     _guide /code/android-gcc-toolchain/android-gcc-toolchain arm64  $OPT "<<< \"./configure --dest-cpu=arm64  --dest-os=android --openssl-no-asm --with-intl=none --cross-compiling --shared && make\""
+            /code/android-gcc-toolchain/android-gcc-toolchain arm64  $OPT  <<<  "./configure --dest-cpu=arm64  --dest-os=android --openssl-no-asm --with-intl=none --cross-compiling --shared && make" ;;
     x86    )
      _guide android-gcc-toolchain x86    $OPT "<<< \"./configure --dest-cpu=x86    --dest-os=android --without-snapshot --without-inspector --without-intl $(grep -o -- --cross-compiling configure) && make\""
             android-gcc-toolchain x86    $OPT  <<<  "./configure --dest-cpu=x86    --dest-os=android --without-snapshot --without-inspector --without-intl $(grep -o -- --cross-compiling configure) && make" ;;
